@@ -224,12 +224,12 @@
 					</dependency>
 				</dependencies>
 				<executions>
-					<execution>
+				<!--  pgaref touched!	<execution>
 						<goals>
 							<goal>compile</goal>
 							<goal>test-compile</goal>
 						</goals>
-					</execution>
+					</execution> -->
 				</executions>
 				<configuration>
 					<outxml>true</outxml>
