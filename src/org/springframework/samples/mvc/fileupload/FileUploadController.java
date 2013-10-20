@@ -2,6 +2,8 @@ package org.springframework.samples.mvc.fileupload;
 
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.springframework.mvc.extensions.ajax.AjaxUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ public class FileUploadController {
 	@RequestMapping(method=RequestMethod.POST)
 	public void processUpload(@RequestParam MultipartFile file, Model model) throws IOException {
 		model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
+		Logger.getLogger(org.springframework.samples.mvc.fileupload.FileUploadController.class).info("Vicky test");
 	}
 	
 }
