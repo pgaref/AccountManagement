@@ -8,6 +8,7 @@
             Goals
         </p>   
         <ul>
+        
             <li> Replace JQuery with Twitter Bootstrap 2.1 </li>
             <li> Incorporate Themes from <a href="http://bootswatch.com" target="_blank">Bootswatch</a> </li> 
             <li> Use only embedded servers (jetty, h2, etc.,)</li>
