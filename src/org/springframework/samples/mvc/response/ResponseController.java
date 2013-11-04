@@ -1,5 +1,6 @@
 package org.springframework.samples.mvc.response;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,12 +20,12 @@ public class ResponseController {
 
 	@RequestMapping(value="/response/charset/accept", method=RequestMethod.GET)
 	public @ResponseBody String responseAcceptHeaderCharset() {
-		return "こんにちは世界！ (\"Hello world!\" in Japanese)";
+		return "γ�“γ‚“γ�«γ�΅γ�―δΈ–η•�οΌ� (\"Hello world!\" in Japanese)";
 	}
 
 	@RequestMapping(value="/response/charset/produce", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public @ResponseBody String responseProducesConditionCharset() {
-		return "こんにちは世界！ (\"Hello world!\" in Japanese)";
+		return "γ�“γ‚“γ�«γ�΅γ�―δΈ–η•�οΌ� (\"Hello world!\" in Japanese)";
 	}
 
 	@RequestMapping(value="/response/entity/status", method=RequestMethod.GET)
@@ -40,5 +41,6 @@ public class ResponseController {
 		return new ResponseEntity<String>("The String ResponseBody with custom header Content-Type=text/plain",
 				headers, HttpStatus.OK);
 	}
+	
 
 }

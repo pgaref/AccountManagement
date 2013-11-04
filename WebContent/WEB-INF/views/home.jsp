@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="com.tutorialspoint.MainApp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,11 +25,15 @@
           <ul>                                
           </h3>           
         </div> 
+        
         <div class="col-md-8"> 
           <h3> 
               Next Steps? Read the code.</br>
           </h3>    
-
+<%
+MainApp app= new MainApp();
+out.println("viki");
+%>
           <ol>
             <li>Clone: <br/> <code> git clone git://github.com/priyatam/springmvc-twitterbootstrap-showcase.git </code> </li>
             <li>Build: <br/> <code> $ mvn clean install </code> </li>

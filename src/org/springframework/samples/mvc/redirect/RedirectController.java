@@ -2,6 +2,7 @@ package org.springframework.samples.mvc.redirect;
 
 import javax.inject.Inject;
 
+import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
@@ -43,5 +44,6 @@ public class RedirectController {
 	public String show(@PathVariable String account, @RequestParam(required=false) LocalDate date) {
 		return "redirect/redirectResults";
 	}
+
 
 }
