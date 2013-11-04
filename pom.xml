@@ -27,6 +27,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- JDBC Driver pgaref -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-jdbc</artifactId>
+    		<version>3.0.6.RELEASE</version>
+		</dependency>
+		<!-- MYSQL connector pgaref -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.11</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
