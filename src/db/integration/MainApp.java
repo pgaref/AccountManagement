@@ -37,9 +37,9 @@ public class MainApp {
 				.getBean("CustomerJDBCTemplate");
 
 		System.out.println("------Records Creation--------");
-		myJDBCTemplate.create(1,"Zara", "comment 1");
-		myJDBCTemplate.create(2,"Nuha", "comment 2");
-		myJDBCTemplate.create(15, "Ayan", "comment 3");
+		myJDBCTemplate.create(1,"pgaref", "comment 1");
+		myJDBCTemplate.create(2,"katikar", "comment 2");
+		myJDBCTemplate.create(15, "whatever", "comment 3");
 
 		System.out.println("------Listing Multiple Records--------");
 		List<Customer> customers = myJDBCTemplate.listCustomers();
