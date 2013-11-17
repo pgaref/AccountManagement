@@ -32,14 +32,15 @@ public class MainApp {
 		*/ 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"Beans.xml");
+		
 
 		CustomerJDBCTemplate myJDBCTemplate = (CustomerJDBCTemplate) context
 				.getBean("CustomerJDBCTemplate");
 
 		System.out.println("------Records Creation--------");
-		myJDBCTemplate.create(1,"pgaref", "comment 1");
-		myJDBCTemplate.create(2,"katikar", "comment 2");
-		myJDBCTemplate.create(15, "whatever", "comment 3");
+		//myJDBCTemplate.create(1,"pgaref","Dpgaref", "pgaref@csd.uoc.gr","comment 1");
+		//myJDBCTemplate.create(2,"katikar","Dkatikar", "katikar@csd.uoc.gr","comment 2");
+		//myJDBCTemplate.create(15,"toulios", "Dtoulios","toulios@csd.uoc.gr", "comment 3");
 
 		System.out.println("------Listing Multiple Records--------");
 		List<Customer> customers = myJDBCTemplate.listCustomers();
@@ -49,7 +50,7 @@ public class MainApp {
 		}
 
 		System.out.println("----Updating Record with ID = 2 -----");
-		myJDBCTemplate.update(2, "newDomain");
+		myJDBCTemplate.update(1, "newDomain");
 
 		System.out.println("----Listing Record with ID = 2 -----");
 		Customer tmp = myJDBCTemplate.getCustomer(2);
@@ -61,9 +62,26 @@ public class MainApp {
 		 * Cleaning Database - Primary Keys cannot be duplicate
 		 */
 		
-		myJDBCTemplate.delete(1);
-		myJDBCTemplate.delete(2);
-		myJDBCTemplate.delete(15);
+		
+		myJDBCTemplate.update_comments(2,"new_comment");
+		//myJDBCTemplate.delete(15);
+		
+		HistoryJDBCTemplate myJDBCHis = (HistoryJDBCTemplate) context
+				.getBean("HistoryJDBCTemplate");
+		
+		java.util.Date date= new java.util.Date();
+		Timestamp timestamp=new Timestamp(date.getTime()); 
+		
+		//myJDBCHis.create(15 , "Dtoulios",timestamp,"reason1","email1");
+		
+		/*
+		 *search in customers 
+		 * */
+		Customer a=myJDBCTemplate.search_domain("Dkatikar");
+		Customer b=myJDBCTemplate.search_email("katikar@csd.uoc.gr");
+		Customer c=myJDBCTemplate.search_name("katikar");
+		
+		
 		
 		System.out.println("Cleaning Done!");
 		

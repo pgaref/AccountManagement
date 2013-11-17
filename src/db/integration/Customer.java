@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 
 public class Customer {
 	private Integer ID;
+	private String name;
 	private Timestamp regDate;
 	private Timestamp expDate;
 	private String domain;
@@ -66,14 +67,22 @@ public class Customer {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
-	
+	public void setName(String name) {
+		this.name=name;
+		
+	}
+	public String getName() {
+		return this.name;
+		
+	}
 	public String toString() {
-		return ("ID: " + this.getID() + ", RegDate: " + this.getRegDate()
+		return ("ID: " + this.getID() +",Name:"+this.name+ ", RegDate: " + this.getRegDate()
 				+ ", ExpDate: " + this.getExpDate() + ", Domain: "
 				+ this.getDomain() + ", email: " + this.getEmail()
 				+ ", Mobile: " + this.getEmail() + ", Charge: "
 				+ this.getCharge() + ", Updated: " + this.getLastUpdate());
 	}
+	
 
 	
 }
