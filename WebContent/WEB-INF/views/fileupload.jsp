@@ -18,7 +18,6 @@
 			  		</c:if>
 				</div>
 
-
 				<input type="file" id="file" name="file" />
 				
                 <div style="padding-top:20px;"></div>

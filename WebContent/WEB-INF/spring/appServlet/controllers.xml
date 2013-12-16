@@ -8,12 +8,24 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan base-package="org.springframework.samples.mvc" />
+	<context:component-scan base-package="db.integration" />
 
 	<!--Routes -->
+
+
+	<mvc:view-controller path="/home" view-name="home"/>
 	<mvc:view-controller path="/" view-name="home"/>
-	<mvc:view-controller path="/getstarted" view-name="getstarted"/>
-	<mvc:view-controller path="/errors-validations" view-name="errors-validations"/>	  
-	<mvc:view-controller path="/misc" view-name="misc"/>	  
-	<mvc:view-controller path="/faq" view-name="faq"/>
+	<mvc:view-controller path="/form" view-name="form"/>
+	
+	<mvc:view-controller path="/delete" view-name="delete"/>
+	<mvc:view-controller path="/customerList" view-name="customerList"/>	  
+	<mvc:view-controller path="/notifications" view-name="notifications"/>	  
+	<mvc:view-controller path="/search" view-name="search"/>
+	
+	<mvc:view-controller path="/edit" view-name="edit"/>
+	<mvc:view-controller path="/update" view-name="update"/>
+	<mvc:view-controller path="/history" view-name="history"/>
+	<mvc:view-controller path="/debtors" view-name="debtors"/>
+	<mvc:view-controller path="/back-up" view-name="back-up"/>
 
 </beans>

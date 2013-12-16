@@ -5,13 +5,16 @@
 
 <c:if test="${!ajaxRequest}">
 <html>
-<body>
+
+<body  >
+
 </c:if>
-	<div id="formsContent">
-		<h2>Create Customer Account Form</h2>
+	<div id="formsContent" style="z-index:-1;">
+		<!-- <h3>Create Customer Account Form</h3> -->
 		
         
-		<form:form id="form" method="post" modelAttribute="formBean" class="form-horizontal" role="form">                 
+		<form:form id="form" method="post" modelAttribute="formBean" class="form-horizontal" role="form">  
+		<form:errors path="exist" />               
             <c:if test="${not empty message}">
                 <div id="message" class="success">${message}</div>	
             </c:if>
@@ -26,119 +29,108 @@
 		  		
 		  		<div class="form-group error">
 					<form:label class="col-lg-2 control-label" path="name"> 
-						Name <form:errors path="name" />
+						*Name <form:errors path="name" />
 					</form:label>
 					<div class="col-lg-6">
-						<form:input path="name" class="form-control" placeholder="name"/>
+						<form:input path="name" class="form-control" placeholder="name"/> 
 					</div>
 				</div>	
-				<div class="form-group warning">
-					<form:label class="col-lg-2 control-label" path="age">
-		  				Surname <form:errors path="age" />
+				
+				<div class="form-group error">
+					<form:label class="col-lg-2 control-label" path="domain"> 
+						*Domain <form:errors path="domain" />
 					</form:label>
 					<div class="col-lg-6">
-						<form:input class="form-control" path="age" />
+						<form:input path="domain" class="form-control" placeholder="domain"/>
 					</div>
-				</div>
+				</div>	
+				
+				
 		  		<div class="form-group success">
 					<form:label class="col-lg-2 control-label" path="birthDate">            
-		  				Birth Date <form:errors path="birthDate"/>
+		  				*Expiration Date <form:errors path="birthDate"/>
 					</form:label>
 					<div class="col-lg-6">												 
 	                    <form:input class="form-control" path="birthDate" size="16" placeholder="yyyy-mm-dd"/>	                    
 					</div>
 				</div>
-		 		<div class="form-group">
-					<form:label class="col-lg-2 control-label" path="currency">
-		  				e-mail <form:errors path="currency" />
-					</form:label>
-					<div class="col-lg-6">
-						<div class="input-prepend input-append">
-							<span class="add-on"></span><form:input path="currency" class="input-medium"/><span class="add-on">.00</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<form:label class="col-lg-2 control-label" path="phone">
-		  				Phone <form:errors path="phone" />
-					</form:label>
-					<div class="col-lg-6">
-						<form:input path="phone" class="form-control input-medium" placeholder="(+30) 697-756788)"/>
-					</div>
-				</div>
-		  		<div class="form-group">
-					<form:label class="col-lg-2 control-label" path="percent">
-		  				Date <form:errors path="percent" />
-					</form:label>
-					<div class="col-lg-6">
-						<form:input path="percent" class="form-control input-small" placeholder="yyyy-mm-dd"/>
-					</div>
-				</div>		 
+					 
 		  	</fieldset>
 	
             <hr/>
-            
-			<fieldset>
-				<legend>Details</legend>
-				<div class="form-group">
-					<form:label class="col-lg-2 control-label" path="inquiry">
-						Type (select one)
+          
+	
+			<fieldset >
+				<legend>Additional Info</legend>
+				
+				Select one or two:
+				<br/>
+				<form:errors path="check" />
+				
+				 <label class="checkbox inline" id="checkit">					
+					<form:checkbox id="email1" path="additionalInfo[email]" onChange= "persistCheckBox(this);" onclick="make_visible();" value="true"  /> Notify user by e-mail
+				</label>
+				<label class="checkbox inline" id="checkit">
+					<form:checkbox id="phone1" path="additionalInfo[phone]" onChange= "persistCheckBox(this);" onclick="Javascript:make_visible();" value="true" /> Notify user by phone
+				</label> 
+				<!--
+						EMAIL ******************************** 
+				 -->
+				<div class="form-group error" id="email"  >
+					<form:label class="col-lg-2 control-label" path="email"> 
+						*Email<form:errors path="email" />
 					</form:label>
 					<div class="col-lg-6">
-						<form:select class="form-control" path="inquiry">
-							<form:option class="form-control" value="comment">Comment</form:option>
-							<form:option class="form-control" value="feedback">Feedback</form:option>
-							<form:option class="form-control" value="suggestion">Suggestion</form:option>
-						</form:select>
+						<form:input path="email" class="form-control" placeholder="someone@example.com"/>
 					</div>
 				</div>
+				<!--
+						PHONE ********************************** 
+				 -->
+				<div class="form-group" id="phone" >
+					<form:label class="col-lg-2 control-label" path="phone">
+		  				*Phone<form:errors path="phone" />
+					</form:label>
+					<div class="col-lg-6">
+						<form:input path="phone" class="form-control input-medium" placeholder="030-697-7567888"/>
+					</div>
+				</div>
+				
+				
 				<div class="form-group">
 					<form:label class="col-lg-2 control-label" path="inquiryDetails"> 
-		  				Details
+		  				Comments
 					</form:label>
 					<div class="col-lg-6">
 						<form:textarea class="form-control" path="inquiryDetails" />
 					</div>
-				</div>						  	
-		  	</fieldset>
-	
-			<fieldset >
-				<legend>Additional Info</legend>
-				<label class="checkbox inline">					
-					<form:checkbox path="additionalInfo[mvc]" value="true" /> notify user by e-mail
-				</label>
-				<label class="checkbox inline">
-					<form:checkbox path="additionalInfo[java]" value="true" /> notigy user by phone
-				</label>
+				</div>
+				
 			</fieldset>
 
 		  	</p>
-			
-			<fieldset >
-				<legend>Are these information correct?</legend>
-				<label class="radio">
-					<form:radiobutton path="subscribeNewsletter" value="true" />
-					Yes
-				</label>
-				<label class="radio">
-					<form:radiobutton path="subscribeNewsletter" value="false" />
-					No
-				</label>
-			</fieldset>
+		
 	        <hr/>
-			<p><button type="submit" class="btn btn-primary">Submit</button></p>				
+			<p><button type="submit" class="btn btn-primary" >Submit</button></p>				
 		</form:form>
-
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/form.js" />"></script>
 		<script type="text/javascript">
+		
 			$(document).ready(function() {
-			$("#form").submit(function() {  
+				
+			$("#form").submit(function() { 
+				
 				$.post($(this).attr("action"), $(this).serialize(), function(html) {
+					
 					$("#formsContent").replaceWith(html);
 					$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);
 				});
+				
 				return false;  
 				});			
 			});
+			  
 		</script>
 	</div>
 

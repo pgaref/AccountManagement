@@ -1,28 +1,39 @@
 package db.integration;
-import java.sql.Timestamp;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
 
 public class Customer {
-	private Integer ID;
+	private int ID;
 	private String name;
-	private Timestamp regDate;
-	private Timestamp expDate;
+	private Date regDate;
+	private Date expDate;
 	private String domain;
 	private String email;
 	private String mobile;
 	private Integer charge;
 	private String comments;
-	private Timestamp lastUpdate;
+	private Date lastUpdate;
+	private String new_Date="";
+	private int how_long=32;
+	private int notifications;
+	private int new_charge;
+	private boolean exist;
+	private int month;
 	
-	public Timestamp getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Timestamp regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Timestamp getExpDate() {
+	public Date getExpDate() {
 		return expDate;
 	}
-	public void setExpDate(Timestamp expDate) {
+	public void setExpDate(Date expDate) {
 		this.expDate = expDate;
 	}
 	public Integer getCharge() {
@@ -49,10 +60,10 @@ public class Customer {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public Timestamp getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
-	public void setLastUpdate(Timestamp lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 	public String getMobile() {
@@ -67,6 +78,12 @@ public class Customer {
 	public void setID(Integer iD) {
 		ID = iD;
 	}
+	public Integer getId() {
+		return ID;
+	}
+	public void setId(Integer iD) {
+		ID = iD;
+	}
 	public void setName(String name) {
 		this.name=name;
 		
@@ -75,6 +92,7 @@ public class Customer {
 		return this.name;
 		
 	}
+	
 	public String toString() {
 		return ("ID: " + this.getID() +",Name:"+this.name+ ", RegDate: " + this.getRegDate()
 				+ ", ExpDate: " + this.getExpDate() + ", Domain: "
@@ -82,6 +100,48 @@ public class Customer {
 				+ ", Mobile: " + this.getEmail() + ", Charge: "
 				+ this.getCharge() + ", Updated: " + this.getLastUpdate());
 	}
+	public void setExpDate_input(String output) {
+		
+		this.setNew_Date(output);
+	}
+	public String getNew_Date() {
+		return new_Date;
+	}
+	public void setNew_Date(String new_Date) {
+		this.new_Date = new_Date;
+	}
+	public int getHow_long() {
+		return how_long;
+	}
+	public void setHow_long(int how_long) {
+		this.how_long = how_long;
+	}
+
+	public int getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(int notifications) {
+		this.notifications = notifications;
+	}
+	public int getNew_charge() {
+		return new_charge;
+	}
+	public void setNew_charge(int new_charge) {
+		this.new_charge = new_charge;
+	}
+	public boolean isExist() {
+		return exist;
+	}
+	public void setExist(boolean exist) {
+		this.exist = exist;
+	}
+	public int getMonth() {
+		return month;
+	}
+	public void setMonth(int month) {
+		this.month = month;
+	}	
+	
 	
 
 	
