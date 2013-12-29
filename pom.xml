@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.samples</groupId>
-	<artifactId>spring-mvc-showcase</artifactId>
-	<name>spring-mvc-showcase</name>
+	<artifactId>hosting-account-managment</artifactId>
+	<name>hosting-account-managment</name>
 	<url>http://maven.apache.org</url>
 	
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
 	<properties>
@@ -265,6 +265,15 @@
 					<target>${java-version}</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+        			<artifactId>maven-war-plugin</artifactId>
+        			<configuration>
+          				<failOnMissingWebXml>false</failOnMissingWebXml>
+        			</configuration>
+      			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
