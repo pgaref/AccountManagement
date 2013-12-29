@@ -3,7 +3,9 @@ package db.integration;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +65,7 @@ public class EditController {
 		public FormBean getCustomer(@RequestParam String id) {
 			
 			 Customer customer = myJDBCTemplate.getCustomer(id);  
-				  
+			// System.out.println("1&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   "+ customer.getExpDate());
 			  Map<String, Object> map_info = new HashMap<String, Object>();  
 			  map_info.put("customer", customer);
 			  boolean email=false,phone=false;
@@ -89,12 +91,23 @@ public class EditController {
 			  Map<String, String> addition=new HashMap<String , String >();
 			  addition.put("email", ifemail);
 			  addition.put("phone",ifphone);
+			  Date exp_date_cus =customer.getExpDate();
 			  
-			  FormBean bean= new FormBean(customer.getName(),customer.getDomain(),customer.getEmail(),customer.getExpDate(),customer.getMobile(),customer.getComments());//,ifemail,ifphone);
-			 
+			  
+			  String days=Integer.toString(exp_date_cus.getDate());
+			  String months=Integer.toString(exp_date_cus.getMonth()+1);
+			  String years=Integer.toString(exp_date_cus.getYear()+1900);
+			  
+			  FormBean bean= new FormBean(customer.getName(),customer.getDomain(),customer.getEmail(),customer.getExpDate(),customer.getMobile(),customer.getComments(),days,months,years);//,ifemail,ifphone);
+			  customer.setDays(days);
+			  customer.setMonths(months);
+			  customer.setYears(years);
+			  
+			  
 			
 			  map_info.put("email",email);
 			  map_info.put("phone", phone);
+			  
 			  
 			  ModelAndView model= new ModelAndView("edit", "map", map_info);
 			  
@@ -186,11 +199,55 @@ public class EditController {
 				result.rejectValue("exist", "error.user", "This Domain already used by different user");
 			}
 			
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
+		      /* System.out.println(formbean.getDays()+"    apo to Bean");
+		   System.out.println((String)result.getFieldValue("months") +"   ******************** "+ "edw enai to year ena se string");
+		   System.out.println((String)result.getFieldValue("days") +"   ******************** "+ "edw enai to year ena se string");
+		   System.out.println((String)result.getFieldValue("years") +"   ******************** "+ "edw enai to year ena se string");*/
+	       
+			
+			String[] parts_year = ((String)result.getFieldValue("years")).split(",");
+			String year1 =parts_year[parts_year.length-1];
+			
+			String[] parts_month = ((String)result.getFieldValue("months")).split(",");
+			String month1 =parts_month[parts_month.length-1];
+			
+			String[] parts_day = ((String)result.getFieldValue("days")).split(",");
+			String day1 =parts_day[parts_day.length-1];
+			
+	       
+	       if ((year1.equalsIgnoreCase("0")) || (month1.equalsIgnoreCase("0"))  ||  (day1.equalsIgnoreCase("0"))){
+	    	   result.rejectValue("birthDate", "error.user", "may not be empty");
+	       }
+	       
+	       if (result.hasErrors()) {
+				
+				return null;
+			} 
+	       
+	       int year = Integer.parseInt(year1);
+	       int month = Integer.parseInt(month1);
+	       int day = Integer.parseInt(day1);
+	       
+	       
+	       
+		   Date todate = new Date((year-1900),(month-1),day);
+		   Date today = new Date();
+		   
+		   if(today.compareTo(todate)>0){
+				result.rejectValue("exist", "error.user", "Today is after the Expiration Date");
+				
+			}
+		   String today_str=formatter.format(todate);
+			
 			if (result.hasErrors()) {
 				
 				return null;
 			}
-			int done=myJDBCTemplate.updateData(Integer.parseInt((String)result.getFieldValue("id")),(String)result.getFieldValue("name"),(String)result.getFieldValue("domain"),(String) result.getFieldValue("email"),(String)result.getFieldValue("inquiryDetails"),(String)result.getFieldValue("phone"),(String)result.getFieldValue("birthDate"),notify1,notify2);
+			
+			
+			int done=myJDBCTemplate.updateData(Integer.parseInt((String)result.getFieldValue("id")),(String)result.getFieldValue("name"),(String)result.getFieldValue("domain"),(String) result.getFieldValue("email"),(String)result.getFieldValue("inquiryDetails"),(String)result.getFieldValue("phone"),today_str,notify1,notify2);
 			if (done!=1){
 				result.rejectValue("exist", "error.user", "Data can not be renewed");
 			}

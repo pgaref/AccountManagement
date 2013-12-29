@@ -78,7 +78,6 @@ public class CustomerJDBCTemplate implements CustomerDAO {
 		List<Customer> customerList = new ArrayList<Customer>();  
 		String SQL = "select * from customer where ID = ?";
 		customerList.add(  jdbcTemplateObject.queryForObject(SQL, new Object[] { id }, new CustomerMapper()));
-
 		return customerList.get(0);
 	}
 	
@@ -357,7 +356,7 @@ public class CustomerJDBCTemplate implements CustomerDAO {
 	public List<Customer> sort_notifications_listCustomers(List<Customer> cus) {
 		Collections.sort(cus, new Comparator<Customer>() {
             public int compare(Customer contact, Customer another) {
-            	
+            	System.out.println(contact.getHow_long() +"  -----------  "+another.getHow_long());
                 return contact.getHow_long()-(another.getHow_long());
             }
         });
@@ -476,6 +475,7 @@ public class CustomerJDBCTemplate implements CustomerDAO {
 	
 	public List<Customer> check_exp_Dates() {
 		List<Customer> cus = listCustomers();
+		List<Customer> cus2 = new ArrayList<Customer>();
 		for (int i = 0; i < cus.size(); i++) {
 			
 			Customer p=cus.get(i);
@@ -503,18 +503,35 @@ public class CustomerJDBCTemplate implements CustomerDAO {
             }
             
 		}
+		/*System.out.println("cus size!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   "+ cus.size());
+		int i=0;
+		while (true){
+			System.out.println("mesa cus size!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   "+ cus.size());
+			if (i==cus.size()){
+				break;
+			}
+			Customer p=cus.get(i);
+			System.out.println("to how long einai  "+ p.getHow_long()+ "  "+ p.getName());
+			if (p.getHow_long()>30){
+				
+				cus.remove(p);
+			}
+			i++;
+			
+		}*/
+		int j=0;
 		int len=cus.size();
 		for (int i = 0; i <len; i++) {
 			
 			Customer p=cus.get(i);
-			if (p.getHow_long()>30){
-				cus.remove(p);
+			if (p.getHow_long()<=30){
+				cus2.add(p);
 			}
 		}
 		
 		
       
-        return cus;
+        return cus2;
 		
 	}
 	public void add_one_more_notification(String note) {
@@ -527,6 +544,7 @@ public class CustomerJDBCTemplate implements CustomerDAO {
 		  
 		String SQL = "update customer set notifications = ? where ID = ?";
 		int new_note=customerList.get(0).getNotifications() +1;
+		
 		jdbcTemplateObject.update(SQL,new_note, Integer.parseInt(note));
 
 		

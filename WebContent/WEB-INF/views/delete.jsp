@@ -74,7 +74,6 @@
 		</form:form>
 
 </div>
-
-
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </body>
 </html>

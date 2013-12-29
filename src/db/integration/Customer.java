@@ -19,6 +19,12 @@ public class Customer {
 	private Date lastUpdate;
 	private String new_Date="";
 	private int how_long=32;
+	
+	//private int  days;
+	private String  days="0";
+	private String  months="0";
+	private String  years="0";
+	
 	private int notifications;
 	private int new_charge;
 	private boolean exist;
@@ -100,6 +106,15 @@ public class Customer {
 				+ ", Mobile: " + this.getEmail() + ", Charge: "
 				+ this.getCharge() + ", Updated: " + this.getLastUpdate());
 	}
+	public String print_it() {
+		String each=" Name: "+this.getName() +"\n" ;
+		String each2=" Domain: " +this.getDomain()+"\n";
+		String each3=" Email: "+ this.getEmail()+"\n";
+		String each4=" Phone: "+ this.getMobile()+"\n";
+		String each5=" Expiration Date: "+this.getNew_Date()+"\n";
+		String each6=" Charge:  "+ this.getCharge()+"\n"+"\n";
+		return (each+each2+each3+each4+each5+each6);
+	}
 	public void setExpDate_input(String output) {
 		
 		this.setNew_Date(output);
@@ -140,6 +155,24 @@ public class Customer {
 	}
 	public void setMonth(int month) {
 		this.month = month;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days2) {
+		this.days = days2;
+	}
+	public String getMonths() {
+		return months;
+	}
+	public void setMonths(String months) {
+		this.months = months;
+	}
+	public String getYears() {
+		return years;
+	}
+	public void setYears(String years) {
+		this.years = years;
 	}	
 	
 	

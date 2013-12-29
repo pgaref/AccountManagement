@@ -59,7 +59,6 @@ public class GeneralController extends MultiActionController {
 	 @RequestMapping(value="/edit" )
 	 public ModelAndView editUser(@RequestParam String id,  
 			   @ModelAttribute Customer customer) {  
-		 //JOptionPane.showMessageDialog(null, "Edit");
 		 
 		 customer = myJDBCTemplate.getCustomer(id);  
 			  
@@ -180,9 +179,18 @@ public class GeneralController extends MultiActionController {
 		 Customer cus=null;
 		 List<Customer> notifications=new ArrayList<Customer>();
 		 notifications=myJDBCTemplate.check_exp_Dates();
+
 		 if (!note.equalsIgnoreCase("all")){
-			 
-			  myJDBCTemplate.add_one_more_notification(note);
+
+			 if(!action.equalsIgnoreCase("delete")){
+				
+			    	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+			    	
+			    	MailMail mm = (MailMail) context.getBean("mailMail");
+			    	
+			        mm.sendMail(myJDBCTemplate.getCustomer(note).getName(), "Please contact with us.",myJDBCTemplate.getCustomer(note).getEmail());
+			        myJDBCTemplate.add_one_more_notification(note);
+			 }
 			  if(action.equalsIgnoreCase("delete")){
 					
 					 int last_id=myJDBCTemplate.get_last_id();
@@ -202,7 +210,7 @@ public class GeneralController extends MultiActionController {
 
 				 } 
 			 
-		}
+	 	}
 		
 		 notifications=myJDBCTemplate.sort_notifications_listCustomers(notifications);
 		 if (notifications==null){
@@ -213,6 +221,53 @@ public class GeneralController extends MultiActionController {
 		// return "redirect:/notifications?note=all";
 		
 	 } 
-	 
+	 @RequestMapping(value="/home")
+     public ModelAndView notifications1(@RequestParam String note , @RequestParam String action) throws ParseException{	
+		 Customer cus=null;
+		 List<Customer> notifications=new ArrayList<Customer>();
+		 notifications=myJDBCTemplate.check_exp_Dates();
+
+		 if (!note.equalsIgnoreCase("all")){
+
+			 if(!action.equalsIgnoreCase("delete")){
+				
+			    	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+			    	
+			    	MailMail mm = (MailMail) context.getBean("mailMail");
+			    	
+			        mm.sendMail(myJDBCTemplate.getCustomer(note).getName(), "Please contact with us.",myJDBCTemplate.getCustomer(note).getEmail());
+			        myJDBCTemplate.add_one_more_notification(note);
+			 }
+			  if(action.equalsIgnoreCase("delete")){
+					
+					 int last_id=myJDBCTemplate.get_last_id();
+					 int given_id=Integer.parseInt(note);
+					 if (given_id<last_id){
+						 cus=myJDBCTemplate.delete_and_move(given_id);
+					 }
+					 else{
+						 cus=myJDBCTemplate.delete(given_id);
+					 }
+					 notifications=myJDBCTemplate.check_exp_Dates();
+					 
+					
+				     Date date= new Date();
+				     int last_id_history=myJDBCTemplate_history.get_last_id();
+					 myJDBCTemplate_history.create(last_id_history,cus.getName(),cus.getDomain(), date,"deleting_com", cus.getEmail(),cus.getMobile());
+
+				 } 
+			 
+	 	}
+		
+		 notifications=myJDBCTemplate.sort_notifications_listCustomers(notifications);
+		 if (notifications==null){
+			 notifications=new ArrayList<Customer>();
+		 }
+		 ModelAndView model = new ModelAndView("home", "notifications", notifications);  
+		 return model;
+		// return "redirect:/notifications?note=all";
+		
+	 } 
+
 	
 }

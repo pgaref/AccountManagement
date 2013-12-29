@@ -16,8 +16,7 @@
 </head>
 <body >
 <div id="formsContent" style="z-index:-1;">
-<!-- <div style="visibility:hidden;" id ="empty"><fieldset >
-	<legend>Empty List</legend></fieldset></div> -->
+
 <fieldset id="fieldset">
 	<legend>Customer List Order by  <b><%= request.getParameter("sort") %></b></legend>
   
@@ -51,8 +50,8 @@
 
 </table>
 <a href="history?sort=all">Delete History</a>
-
-
+</fieldset>
+</div>
 	
 	<script>
 	 var url = window.location.toString();

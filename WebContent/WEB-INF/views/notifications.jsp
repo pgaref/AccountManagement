@@ -63,12 +63,15 @@
 	  
 	  var test_note2=test2[test2.length-1];
 	  
-	
+
 	
 	  if (test_action!="all"){
 	  	window.location = url.replace("note="+test_action,"note=all");
-	  	window.location = url.replace("action="+test_action,"action=add");
+	  	//window.location = url.replace("action="+test_note2,"action=add");
 	  } 
+	  if (test_note2!="add"){
+		  window.location = url.replace("action="+test_note2,"action=add");
+	  }
 
 
 		

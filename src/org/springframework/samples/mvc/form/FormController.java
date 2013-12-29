@@ -3,8 +3,10 @@ package org.springframework.samples.mvc.form;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +56,7 @@ public class FormController {
 	@ModelAttribute("formBean")
 	public FormBean createFormBean() {
 		
+		
 		return new FormBean();
 	}
 	
@@ -69,7 +72,7 @@ public class FormController {
 								Model model, RedirectAttributes redirectAttrs,SessionStatus status) {
 		
 		
-		String notify1= (String)result.getFieldValue("additionalInfo[email]");
+		String notify1= (String)result.getFieldValue("email");
 		String notify2=(String) result.getFieldValue("additionalInfo[phone]");
 		if (notify2==null){
 			notify2="false";
@@ -78,16 +81,7 @@ public class FormController {
 			notify1="false";
 		}
 		
-
-		/////////////////////////////////////////////////////////////////////
-		if ( notify1.equals("false")){
-											// an den exei epileksei kanena apo ta checkboxes
-			if (notify2.equals("false")){
-				result.rejectValue("check", "error.user", "  You must choose at least one ");
-
-			}
-		}
-		/////////////////////////////////////////////////////////////////////
+	
 		if (!notify1.equals("false")){ // an exei epileksei to email
 			if (notify2.equals("false")){ // kai den exei epileksei to phone
 				
@@ -156,9 +150,34 @@ public class FormController {
 		
 		
        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
-	   Date todate = new Date();
-	   String dateInString = (String)result.getFieldValue("birthDate");
-	    Date date1=null;
+      
+       String year1 =((String)result.getFieldValue("years"));
+       String month1 = ((String)result.getFieldValue("months"));
+       String day1 = ((String)result.getFieldValue("days"));
+       if ((year1.equalsIgnoreCase("0")) || (month1.equalsIgnoreCase("0"))  ||  (day1.equalsIgnoreCase("0"))){
+    	   result.rejectValue("birthDate", "error.user", "may not be empty");
+       }
+       
+       if (result.hasErrors()) {
+			
+			return null;
+		} 
+       
+       int year = Integer.parseInt((String)result.getFieldValue("years"));
+       int month = Integer.parseInt((String)result.getFieldValue("months"));
+       int day = Integer.parseInt((String)result.getFieldValue("days"));
+       
+       
+	   Date todate = new Date((year-1900),(month-1),day);
+	   Date today = new Date();
+	   
+	   if(today.compareTo(todate)>0){
+			result.rejectValue("exist", "error.user", "Today is after the Expiration Date");
+			
+		}
+	   String today_str=formatter.format(todate);
+	 //  String dateInString = (String)result.getFieldValue("birthDate");
+	/*    Date date1=null;
 		try {
 	 
 			 date1 = formatter.parse(dateInString);
@@ -167,17 +186,19 @@ public class FormController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		if(todate.compareTo(date1)>0){
-			result.rejectValue("exist", "error.user", "Today is after the Expiration Date");
-			
-		}
+		if (date1!=null){
+			if(todate.compareTo(date1)>0){
+				result.rejectValue("exist", "error.user", "Today is after the Expiration Date");
+				
+			}
+		}*/
 	   
 		if (result.hasErrors()) {
 			
 			return null;
 		} 
 		
-		myJDBCTemplate.create(last_id,(String)result.getFieldValue("name"),(String)result.getFieldValue("domain"),(String) result.getFieldValue("email"),(String)result.getFieldValue("inquiryDetails"),(String)result.getFieldValue("phone"),(String)result.getFieldValue("birthDate"),notify1,notify2,todate,0);
+		myJDBCTemplate.create(last_id,(String)result.getFieldValue("name"),(String)result.getFieldValue("domain"),(String) result.getFieldValue("email"),(String)result.getFieldValue("inquiryDetails"),(String)result.getFieldValue("phone"),today_str,notify1,notify2,today,0);
 		
 		
 		if (result.hasErrors()) {

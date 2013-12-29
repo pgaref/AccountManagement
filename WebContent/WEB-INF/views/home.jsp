@@ -31,48 +31,80 @@
 
 </head>
   <body >  
-  
-<%-- <c:set var="myRequestModel" value="${notifications}" scope="request" />
-<jsp:include page="/WEB-INF/views/notifications.jsp">
-   <jsp:param name="notifications" value="${notifications} "/>
-</jsp:include> --%>
-<%-- <c:import url="/WEB-INF/views/notifications.jsp"/> --%> 
 
-    <%--  <div class="row">     
-        <div class="col-md-4"> 
-          <h3> 
-              Click and Learn</br>
-          </h3>
-          <ul>
-            <li> AAAAASimple Ajax @Controller </li>
-            <li> Mapping Requests </li>
-            <li> Obtaining Request Data </li>
-            <li> Generating Responses </li>
-            <li> Rendering Views </li>
-            <li> Forms </li>
-            <li> File Upload </li>
-            <li> Validation </li>                
-            <li> Exception Handling </li>
-            <li> Message Converters </li>
-            <li> Type Conversion </li>                
-            <li> Layout Decoration (Sitemesh) </li>            
-          <ul>                                
-          </h3>           
-        </div> 
-        <div class="col-md-8"> 
-          <h3> 
-              Next Steps? Read the code.</br>
-          </h3>    
+<div id="formsContent" style="z-index:-1;">
+<fieldset id="fieldset">
+	<legend>Last News </legend>
+	<br/>
+	<input id="hide" type="hidden" value ="${notifications}" />
+	<c:if test="${not empty notifications}">
+	 <c:forEach  items="${notifications}" var="customer"  > 
+	 
+	  
+	   <legend>  Expires On ${customer.how_long} Days &nbsp; 
+ 	  <a id="hide"  href="home?note=${customer.ID}&action=add"><img   style="position:relative;"  src="resources/img/icon_newsletter.png" /></a>
+	  <a id="del"   href="home?note=${customer.ID}&action=delete"><img   style="position:relative;"  src="resources/img/delete3.png" /></a>
+	 </legend>
+	      <div id="expires" class="expires">
+	      <input  name="id" type="hidden" value="${map.customer.ID}"/>
+	      
+	     <b> Name: </b>${customer.name} &nbsp;  <b>| Domain: </b>${customer.domain}   &nbsp;
+	     <b>| Contact: </b> ${customer.email} &nbsp; ${customer.mobile} &nbsp; <b>| Price:</b>  ${customer.charge} &nbsp;
+	     <b>| Notifications: </b> ${customer.notifications}
+	     
+	      </div>
+	     
+     	 <br/>
+	     </c:forEach>  
+	</c:if>
+</fieldset>
+</div>
 
-          <ol>
-            <li>Clone: <br/> <code> git clone git: </code> </li>
-            <li>Build: <br/> <code> $ mvn clean install </code> </li>
-            <li>Run: <br/>  <code> $ mvn jetty:run </code></li>
-            <li>See: <br/>  <code>http://localhost:8080/spring-mvc-showcase/ </code> </li>                                
-          </ol> 
-          </h3>                             
-        </div> 
-     </div> --%>
+  <script>
+ 
+ 	  var url = window.location.toString();
+ 	  if (!url.contains("home")){
+ 		 window.location.href=url+"home?note=all&action=add";
+ 	  }
+ 	  
+ 	 // window.location = url.replace("/"+"","/home?note=all&action=add");
+	  var pathArray = url.split( '/' );
+	  var ids=pathArray[pathArray.length-1];
+	  
+	  var test=ids.split('?');
+	  var test_note=test[test.length-1];
+	  
+	  var test2=test_note.split('=');
+	  var test_note1=test2[1];
+	  var action=test_note1.split('&');
+	  var test_action=action[0];
+	  
+	  var test_note2=test2[test2.length-1];
+	  
+
+	
+	  if (test_action!="all"){
+	  	window.location = url.replace("note="+test_action,"note=all");
+	  	//window.location = url.replace("action="+test_note2,"action=add");
+	  } 
+	  if (test_note2!="add"){
+		  window.location = url.replace("action="+test_note2,"action=add");
+	  }
+
+
+		
+		if(document.getElementById("hide").value=="[]"){
+			document.getElementById("fieldset").style.visibility="hidden";
+			document.getElementById("formsContent").innerHTML="<fieldset ><legend>Empty List</legend></fieldset>";
+		}
+
+
+
+</script>
+
+
+
+
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
  </body>
 </html>

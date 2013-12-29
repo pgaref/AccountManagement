@@ -11,7 +11,7 @@
         </div>
         <div id ="navi" class="navbar-collapse collapse">  
           <ul class="nav navbar-nav">
-            <li id="t0" class="active"><a href="Javascript:change_url('home'); ">WebEasy Portal</a></li>
+            <li id="t0" class="active"><a href="Javascript:change_url('home?note=all&action=add'); ">WebEasy Portal</a></li>
             <li id="t1" ><a href="Javascript:change_url('form'); ">New User</a></li>
             <!-- <li id="t2" ><a href="Javascript:change_url('delete');">Delete User</a></li> -->
             <li id="t3" ><a href="Javascript:change_url('customerList?sort=id'); ">Update User </a></li>

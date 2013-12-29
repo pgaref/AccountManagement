@@ -36,12 +36,13 @@ public class FormBean {
 	@NotEmpty
 	private String domain;
 	
+	@NotEmpty
 	private String email;
 	
 	private int age;
 
-    @DateTimeFormat(pattern="yyyy-mm-dd")
-    @NotNull 
+  //  @DateTimeFormat(pattern="yyyy-mm-dd")
+  //  @NotNull 
 	private Date birthDate;
 
 	private String phone;
@@ -64,17 +65,26 @@ public class FormBean {
 	
 	private boolean check;
     private boolean exist;
-	
+    @NotEmpty 
+    private String days;
+    @NotEmpty 
+    private String months;
+    @NotEmpty 
+    private String years;
+    
 	
 	private Map<String, String> additionalInfo;
 
-	public FormBean(String name, String domain, String email, Date expDate,String phone,String string){//String ifemail, String ifphone){
+	public FormBean(String name, String domain, String email, Date expDate,String phone,String string,String days2,String months,String years){//String ifemail, String ifphone){
 		this.name=name;
 		this.domain=domain;
 		this.email=email;
 		this.birthDate=expDate;
 		this.phone=phone;
 		this.inquiryDetails=string;
+		this.days=days2;
+		this.years=years;
+		this.months=months;
       
 	}
 	public FormBean(){}
@@ -261,4 +271,22 @@ public class FormBean {
         sb.append("additionalInfo=").append(additionalInfo);
         return sb.toString();
     }
+	public String getMonths() {
+		return months;
+	}
+	public void setMonths(String months) {
+		this.months = months;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
+	public String getYears() {
+		return years;
+	}
+	public void setYears(String years) {
+		this.years = years;
+	}
 }

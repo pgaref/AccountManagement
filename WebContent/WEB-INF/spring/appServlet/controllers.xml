@@ -27,5 +27,6 @@
 	<mvc:view-controller path="/history" view-name="history"/>
 	<mvc:view-controller path="/debtors" view-name="debtors"/>
 	<mvc:view-controller path="/back-up" view-name="back-up"/>
+<mvc:view-controller path="/RevenueSummary" view-name="RevenueSummary"/>
 
 </beans>

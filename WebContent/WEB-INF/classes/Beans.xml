@@ -25,9 +25,9 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean>  
    
-   <bean id="back-up"
-	   	class="db.integration.PdfRevenueReportView">
+<bean id="PdfRevenueReportView" class="db.integration.PdfRevenueReportView">
 	</bean>
+ 
  
 
 </beans>

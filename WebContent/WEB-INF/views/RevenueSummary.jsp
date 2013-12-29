@@ -13,12 +13,6 @@
 
   <div id="formsContent" style="z-index:-1;">
 
-
-<%-- 
-<h2>Spring MVC</h2>
-
-<h3>Revenue Report</h3>
-
 <table border="1px" cellpadding="8px">
 <tr>
 <td>Month</td><td>Revenue</td>
@@ -29,7 +23,7 @@
    <td><c:out value="${current.key}" /></td>
    <td><c:out value="${current.value}" /></td>
 </tr>
-</c:forEach> --%>
+</c:forEach>
 </table>
 </div>
 </body>
