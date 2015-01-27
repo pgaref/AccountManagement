@@ -8,9 +8,9 @@
    <!-- Initialization for data source -->
    <bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://139.91.70.117:3306/hostingaccounts"/>
-      <property name="username" value="pgaref"/>
-      <property name="password" value="19899017"/>
+      <property name="url" value="jdbc:mysql://server-ip:3306/hostingaccounts"/>
+      <property name="username" value="randomuser"/>
+      <property name="password" value="randompass"/>
    </bean>
 
 
