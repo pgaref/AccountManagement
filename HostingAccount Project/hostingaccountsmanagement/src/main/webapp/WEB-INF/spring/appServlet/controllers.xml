@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="org.springframework.samples.mvc" />
+	<context:component-scan base-package="db.integration" />
+
+	<!--Routes -->
+
+
+	<mvc:view-controller path="/home" view-name="home"/>
+	<mvc:view-controller path="/" view-name="home"/>
+	<mvc:view-controller path="/form" view-name="form"/>
+	
+	<mvc:view-controller path="/delete" view-name="delete"/>
+	<mvc:view-controller path="/customerList" view-name="customerList"/>	  
+	<mvc:view-controller path="/notifications" view-name="notifications"/>	  
+	<mvc:view-controller path="/search" view-name="search"/>
+	
+	<mvc:view-controller path="/edit" view-name="edit"/>
+	<mvc:view-controller path="/update" view-name="update"/>
+	<mvc:view-controller path="/history" view-name="history"/>
+	<mvc:view-controller path="/debtors" view-name="debtors"/>
+	<mvc:view-controller path="/back-up" view-name="back-up"/>
+<mvc:view-controller path="/RevenueSummary" view-name="RevenueSummary"/>
+
+</beans>
