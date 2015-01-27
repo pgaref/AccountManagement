@@ -1,1 +1,9 @@
-#pgaref@ics.forth.gr This is my README
+Account Management
+========
+Account Management project is a Java Web Application to sipmlify account management of an SQL based system!
+This project runs with Jetty and includes a variety of technologies like bootstrap, Spring MVC, Spring JDBC Beans and more!
+The web application was supposed to run on a windows machine so we include a bat file and a Readme with system requerements!
+
+
+
+![alt tag](https://github.com/pgaref/AccountManagement/blob/master/HostingAccount%20Project/printScreen/home.png)
